@@ -1,24 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tourist Safety Assistant</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TOURISTA – Your Safety, Our AI</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- External CSS linked -->
+    <!-- Icons Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
+    <!-- NAVBAR -->
     <header>
-        <h1>Tourist Safety Assistant</h1>
-        <p>Real-time detection of danger, slips, falls & risky objects.</p>
-        <p>Your AI-powered travel safety companion</p>
+        <div class="logo">TOURISTA</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">How It Works</a>
+            <a href="#">Solutions</a>
+            <a href="#">Contact</a>
+            <a href="scan.html" class="btn-nav">Start Scan</a>
+        </nav>
     </header>
-    
-    <main>
-        <div class="cta-buttons">
-            <a href="scan.html" class="btn primary">Start Safety Scan</a>
-            <a href="tech.html" class="btn">About</a>
-            <a href="team.html" class="btn">Team & Contact</a>
+
+    <!-- HERO SECTION --> 
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Your Safety, Our AI.<br>We've Got You Covered.</h1>
+            <p>An AI‑powered visual system for real‑time danger detection and instant alerts at tourist destinations.</p>
+            <a href="scan.html" class="btn-primary">See How It Works</a>
         </div>
-    </main>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features">
+        <div class="feature-box">
+            <i class="fas fa-exclamation-triangle fa-3x" style="color:#0047ab; margin-bottom:15px;"></i>
+            <h3>Instant Danger Detection</h3>
+            <p>Detects risky objects, fire, smoke, falls, and unusual activities instantly.</p>
+        </div>
+
+        <div class="feature-box">
+            <i class="fas fa-users fa-3x" style="color:#0047ab; margin-bottom:15px;"></i>
+            <h3>Crowd & Safety Monitoring</h3>
+            <p>AI monitors unsafe crowds, slips, and alerts authorities immediately.</p>
+        </div>
+
+        <div class="feature-box">
+            <i class="fas fa-shield-alt fa-3x" style="color:#0047ab; margin-bottom:15px;"></i>
+            <h3>Protect Tourists Anywhere</h3>
+            <p>Helps prevent accidents and improves response time using live AI vision.</p>
+        </div>
+    </section>
 </body>
 </html>
