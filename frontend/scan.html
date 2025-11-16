@@ -1,36 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safety Scan - Tourist Safety Assistant</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Tourist Threat Monitor</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
-<body>
-    <header>
-        <a href="index.html" class="back-btn">&larr; Back</a>
-        <h1>Safety Scan</h1>
+<body class="scan-page"> <header>
+        <div class="nav-left">
+            <i class="fas fa-shield-alt shield"></i>
+            <div class="logo">TOURISTA</div>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/scan">Scan Monitor</a>
+            <a href="/captures">Captures</a>
+            <a href="/tips">Safety Tips</a>
+            <a href="/tech">Technology</a>
+            <a href="/team">Team</a>
+        </nav>
     </header>
-    <div class="scan-container">
-        <div class="camera-panel">
-            <div class="camera-feed">
-                <video id="camera" autoplay playsinline></video>
-                <canvas id="overlay"></canvas>
-            </div>
-            <div class="controls">
-                <button id="start-btn" class="btn primary">Start Camera</button>
-                <button id="stop-btn" class="btn secondary">Stop Camera</button>
-            </div>
-        </div>
-
-        <div class="detection-panel">
-            <h3>Real-time Detections</h3>
-            <div id="alerts-container">
-                <!-- Alerts will appear here dynamically -->
-            </div>
-        </div>
+    
+    <div class="scanning-status">
+        <div class="status-indicator" id="statusIndicator"></div> 
+        <span id="statusText">Checking status...</span>
     </div>
 
-    <script src="scan.js"></script>
+    <div class="scan-container">
+        
+        <div class="video-container">
+            <div class="scan-button-bar">
+                <button class="scan-button start" id="startScanBtn">▶ Start Scanning</button>
+                <button class="scan-button stop" id="stopScanBtn">■ Stop Scanning</button>
+                <a href="/captures" class="scan-button captures">📸 View Captures</a>
+            </div>
+            
+            <img id="videoStream" src="" alt="Video stream offline">
+        </div>
+        
+        <div class="log-container">
+            <h3>Live Activity Log</h3>
+            <div id="log-list">
+                <p class="log-item loading">Connecting to monitoring system...</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- ALL INLINE JAVASCRIPT REMAINS UNCHANGED ---
+        
+        const startBtn = document.getElementById('startScanBtn');
+        const stopBtn = document.getElementById('stopScanBtn');
+        // ... (rest of your JS) ...
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/api/scan_status')
+                .then(res => res.json())
+                .then(data => {
+                    setScanningState(data.is_scanning);
+                })
+                .catch(err => {
+                    console.error('Error getting status:', err);
+                    setScanningState(false);
+                });
+        });
+        function updateLogs() {
+            fetch('/logs')
+                .then(response => response.json())
+                .then(data => {
+                    const logList = document.getElementById('log-list');
+                    logList.innerHTML = '';
+                    if (data.logs.length === 0) {
+                        const p = document.createElement('p');
+                        p.textContent = 'Initializing...';
+                        p.className = 'log-item log-safe';
+                        logList.appendChild(p);
+                    } else {
+                        data.logs.forEach(log => {
+                            const p = document.createElement('p');
+                            p.textContent = log;
+                            p.className = 'log-item';
+                            
+                            if (log.startsWith('THREAT')) {
+                                p.classList.add('log-threat');
+                            } else if (log.startsWith('NOTICE')) {
+                                p.classList.add('log-notice');
+                            } else if (log.startsWith('All clear')) {
+                                p.classList.add('log-safe');
+                            } else {
+                                p.classList.add('log-info');
+                            }
+                            
+                            logList.appendChild(p);
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching logs:', error);
+                    const logList = document.getElementById('log-list');
+                    if (!stopBtn.disabled) {
+                         logList.innerHTML = '<p class="log-item log-threat">Connection to server lost.</p>';
+                    }
+                });
+        }
+        function setScanningState(isScanning) {
+            if (isScanning) {
+                statusIndicator.classList.add('active');
+                statusText.textContent = 'Scanning Active';
+                startBtn.disabled = true;
+                stopBtn.disabled = false;
+                videoStream.src = '/video_feed?' + new Date().getTime();
+                logInterval = setInterval(updateLogs, 1000);
+                updateLogs(); 
+            } else {
+                statusIndicator.classList.remove('active');
+                statusText.textContent = 'Scanning Stopped';
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+                videoStream.src = '';
+                clearInterval(logInterval);
+                clearLogs();
+            }
+        }
+        function clearLogs() {
+            const logList = document.getElementById('log-list');
+            logList.innerHTML = '<p class="log-item log-safe">Scanning is stopped. Press Start.</p>';
+        }
+        startBtn.addEventListener('click', () => {
+            fetch('/api/start_scanning', { method: 'POST' })
+                .then(() => {
+                    console.log('Scanning started');
+                    setScanningState(true);
+                })
+                .catch(err => console.error('Error starting scan:', err));
+        });
+        stopBtn.addEventListener('click', () => {
+            fetch('/api/stop_scanning', { method: 'POST' })
+                .then(() => {
+                    console.log('Scanning stopped');
+                    setScanningState(false);
+                })
+                .catch(err => console.error('Error stopping scan:', err));
+        });
+        window.addEventListener('beforeunload', () => {
+            if (!stopBtn.disabled) {
+                navigator.sendBeacon('/api/stop_scanning', new Blob());
+            }
+        });
+    </script>
+
 </body>
 </html>

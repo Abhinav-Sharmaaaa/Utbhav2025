@@ -1,4 +1,6 @@
-/* TOURISTA RECREATED EXACTLY LIKE THE IMAGE */
+/* ============================================
+   GLOBAL THEME & INDEX PAGE
+   ============================================ */
 
 /* COLORS */
 :root {
@@ -7,6 +9,8 @@
     --dark-box: #2a2f36;
     --light-bg: #f3f4f6;
     --white: #ffffff;
+    --danger: #ff3333;
+    --notice: #ff6600;
     --shadow: 0 10px 25px rgba(0,0,0,0.12);
 }
 
@@ -19,12 +23,14 @@
 
 body{
     background: var(--light-bg);
+    /* Add padding to the top to offset the 80px fixed header */
+    padding-top: 80px; 
 }
 
 /* NAVBAR */
 header{
     width:100%;
-    padding:20px 60px;
+    padding: 20px 40px; /* Adjusted padding */
     background:#fff;
     display:flex;
     justify-content:space-between;
@@ -52,11 +58,21 @@ header{
     color:var(--primary-color);
 }
 
+nav {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Added gap */
+}
+
 nav a{
-    margin-left:25px;
     text-decoration:none;
     color:#333;
-    font-weight:500;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: var(--primary-color);
 }
 
 .btn-nav{
@@ -65,8 +81,12 @@ nav a{
     border-radius:6px;
     color:white !important;
 }
+.btn-nav:hover {
+    color: white !important;
+    background: #003b8e;
+}
 
-/* HERO */
+/* HERO (for index.html) */
 .hero{
     height:80vh;
     background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
@@ -74,6 +94,8 @@ nav a{
     display:flex;
     align-items:center;
     padding-left:80px;
+    /* This overrides the body padding-top for the index page */
+    margin-top: -80px;
 }
 
 .hero-overlay{
@@ -111,7 +133,7 @@ nav a{
     text-decoration:none;
 }
 
-/* DARK FEATURE BOX */
+/* DARK FEATURE BOX (for index.html) */
 .dark-card{
     background:var(--dark-box);
     padding:50px 70px;
@@ -147,7 +169,7 @@ nav a{
     line-height:1.5;
 }
 
-/* WHITE CARD LIKE IMAGE */
+/* WHITE CARD LIKE IMAGE (for index.html) */
 .white-card{
     background:white;
     width:80%;
@@ -162,7 +184,7 @@ nav a{
     font-size:22px;
 }
 
-/* CTA FINAL CARD */
+/* CTA FINAL CARD (for index.html) */
 .cta-card{
     background:white;
     width:80%;
@@ -190,7 +212,8 @@ nav a{
     background:var(--primary-color);
     border-radius:6px;
     color:white;
-    text-decoration:0.25s ease;
+    text-decoration: none; /* Fixed missing property */
+    transition: 0.25s ease; /* Fixed missing property */
 }
 .demo-btn:hover {
     background: #003b8e;
@@ -217,106 +240,358 @@ nav a{
 }
 
 /* ============================================
-   SCAN PAGE UI (EXACT LIKE IMAGE)
+   GENERIC PAGE WRAPPER (for non-index pages)
    ============================================ */
 
-.top-bar {
-    width: 100%;
-    background: #0d47a1;
-    padding: 18px 30px;
+.page-wrapper {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 30px;
+    background: var(--light-bg);
+}
+
+.page-title {
+    font-size: 2.5em;
+    font-weight: 800;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.page-subtitle {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* ============================================
+   SCAN PAGE
+   ============================================ */
+/* Scan page uses a dark theme, so we'll override the body bg */
+body.scan-page {
+    background-color: #1a1a1a;
+}
+
+.scanning-status {
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 20px;
-    color: white;
-    font-weight: 600;
-    margin-top: 90px; 
+    gap: 10px;
+    padding: 10px 20px;
+    background-color: #2a2a2a;
+    color: white; 
+    /* This sits right below the fixed header */
+    position: fixed;
+    top: 80px; /* Height of header */
+    width: 100%;
+    z-index: 5;
 }
-
-.top-bar i {
-    font-size: 22px;
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ff0000;
 }
+.status-indicator.active {
+    background-color: #00ff00;
+    animation: pulse 1.5s infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-.scan-wrapper {
+.scan-container {
     display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 40px;
+    flex-wrap: wrap;
+    /* Add padding to account for status bar */
+    padding: 70px 20px 20px 20px;
 }
-
-.scan-box {
-    width: 75%;
-    padding: 30px 40px;
-    border-radius: 18px;
-    box-shadow: 0px 15px 40px rgba(0,0,0,0.25);
-    color: white;
+.video-container {
+    flex: 3;
+    min-width: 600px;
+    padding-right: 20px;
 }
-
-.scan-box h2 {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 25px;
-}
-
-/* CAMERA WINDOW */
-.camera-frame {
-    width: 100%;
-    height: 500px;
-    border-radius: 14px;
-    overflow: hidden;
-    position: relative;
-    background:black;
-}
-
-video, canvas {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    object-fit: cover;
-}
-
-/* BUTTONS */
-.button-row {
+.log-container {
+    flex: 1;
+    min-width: 300px;
+    background-color: #000;
+    border: 1px solid #444;
+    border-radius: 8px;
+    /* Set max-height to fit viewport */
+    max-height: calc(100vh - 170px);
+    overflow-y: auto;
     display: flex;
-    justify-content: space-between;
-    margin-top: 25px;
+    flex-direction: column;
 }
+.video-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 2px solid #555;
+    background-color: #000;
+}
+.log-container h3 {
+    padding: 15px 20px;
+    margin: 0;
+    border-bottom: 1px solid #444;
+    color: #00aaff;
+}
+#log-list { 
+    padding: 20px; 
+    flex-grow: 1;
+    overflow-y: auto;
+}
+.log-item {
+    margin: 0 0 10px 0;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+.log-safe { color: #888; }
+.log-info { background-color: #2a2a2a; color: #ddd; }
+.log-notice { background-color: #333300; color: #ffffaa; border-left: 3px solid #ffff00; }
+.log-threat { background-color: #440000; color: #ffaaaa; border-left: 3px solid #ff0000; font-weight: 700; font-size: 1em; }
+.loading { text-align: center; color: #888; padding: 20px; font-style: italic; }
 
-.btn {
-    padding: 13px 30px;
-    border-radius: 30px;
-    font-size: 16px;
-    cursor: pointer;
+/* Scan Page Buttons */
+.scan-button-bar { 
+    padding: 20px;
+    background: #1a1a1a;
+    border-bottom: 1px solid #333;
+}
+.scan-button {
+    background-color: #00aaff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
     font-weight: 600;
     border: none;
-    transition: 0.2s ease-in-out;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.scan-button.start { background-color: #00cc66; }
+.scan-button.start:hover { background-color: #00aa55; }
+.scan-button.stop { background-color: var(--danger); }
+.scan-button.stop:hover { background-color: #cc2222; }
+.scan-button:disabled { background-color: #555; color: #999; cursor: not-allowed; }
+.scan-button.captures { background-color: var(--notice); }
+.scan-button.captures:hover { background-color: #cc5200; }
+
+
+/* ============================================
+   CAPTURES PAGE
+   ============================================ */
+/* Captures page also uses a dark theme */
+body.captures-page {
+    background-color: #1a1a1a;
+    color: #eee;
 }
 
-.btn.start {
-    background: #1a73e8;
-    color: white;
+.captures-header {
+    background-color: #2a2a2a;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #444;
+}
+.stat { text-align: center; }
+.stat-value { font-size: 2em; font-weight: bold; color: var(--danger); }
+.stat-label { color: #aaa; font-size: 0.9em; margin-top: 5px; }
+
+.captures-container {
+    padding: 20px;
+    max-width: 1600px; /* Wider for captures */
+    margin: 0 auto;
 }
 
-.btn.stop {
-    background: #3a3f46;
-    color: white;
+.captures-toolbar {
+    margin-bottom: 20px;
+    text-align: right;
 }
-
-.btn.back {
-    background: #e5e7eb;
-    color: #222;
-    text-decoration: none;
-}
-.btn:hover {
-    background: #003b8e;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 18px rgba(0, 71, 171, 0.35);
-}
-/* STATUS */
-.system-status {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
+.captures-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
     font-weight: 600;
-    color: #00ff60;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+}
+.captures-btn.clear { background-color: var(--notice); color: white; }
+.captures-btn.clear:hover { background-color: #cc5200; }
+
+.empty-state {
+    text-align: center;
+    padding: 100px 20px;
+    color: #666;
+}
+.empty-state i { font-size: 4em; margin-bottom: 20px; }
+.empty-state h2 { font-size: 1.5em; margin-bottom: 10px; }
+
+.captures-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+.capture-card {
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid var(--danger);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.capture-card:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 5px 20px rgba(255, 51, 51, 0.3);
+}
+.capture-image { 
+    width: 100%; 
+    height: 240px; 
+    object-fit: cover; 
+    cursor: pointer; 
+    display: block;
+}
+.capture-info { padding: 15px; }
+.capture-time { color: #00aaff; font-weight: 600; margin-bottom: 8px; font-size: 0.95em; }
+.capture-description { 
+    color: #ffaaaa; 
+    font-weight: 700; 
+    font-size: 1.1em; 
+    padding: 10px; 
+    background-color: #440000; 
+    border-radius: 5px; 
+    border-left: 4px solid var(--danger);
+}
+
+/* Modal (from captures.html) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close-modal:hover { color: var(--danger); }
+.spinner {
+    border: 4px solid #333;
+    border-top: 4px solid var(--danger);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* ============================================
+   TEAM/TIPS/TECH PAGES (New Styles)
+   ============================================ */
+
+.card-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+.info-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+.info-card h3 {
+    font-size: 1.5em;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+.info-card p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+.info-card .role {
+    font-style: italic;
+    color: #555;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.info-card .links {
+    margin-top: auto; /* Pushes links to the bottom */
+}
+.info-card .links .btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    background-color: var(--dark-box);
+    color: white;
+    transition: background-color 0.2s;
+}
+.info-card .links .btn:hover {
+    background-color: #000;
+}
+.info-card .links .btn.github {
+    background-color: #333;
+}
+.info-card .links .btn.github:hover {
+    background-color: #000;
+}
+
+.info-card ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+.info-card ul li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+.info-card ul li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--primary-color);
+    font-weight: 800;
+}
+
+.info-card pre { /* From tech.html */
+    background-color: #2a2f36;
+    color: #eee;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre-wrap;
+    font-size: 0.9em;
 }

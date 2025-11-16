@@ -4,52 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Technology - Tourist Safety Assistant</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
     <header>
-        <a href="index.html" class="back-btn">&larr; Back</a>
-        <h1>Technology Overview</h1>
-        <p>How we detect safety risks in real-time</p>
+        <div class="nav-left">
+            <i class="fas fa-shield-alt shield"></i>
+            <div class="logo">TOURISTA</div>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/scan">Scan Monitor</a>
+            <a href="/captures">Captures</a>
+            <a href="/tips">Safety Tips</a>
+            <a href="/tech">Technology</a>
+            <a href="/team">Team</a>
+        </nav>
     </header>
     
-    <main class="tech-container">
-        <div class="tech-card">
-            <h3>MediaPipe Pose</h3>
-            <p>Detects 33 body keypoints for pose estimation</p>
-            <ul class="unordered-list">
-                <li>Identifies falls/slips through joint angles</li>
-                <li>Detects raised hands (help signals)</li>
-                <li>Monitors lack of movement</li>
-            </ul>
-        </div>
-        
-        <div class="tech-card">
-            <h3>YOLO/YuNet Object Detection</h3>
-            <p>Identifies dangerous objects and hazards</p>
-            <ul class="unordered-list">
-                <li>Weapons detection</li>
-                <li>Vehicle proximity alerts</li>
-                <li>Fire/smoke recognition</li>
-                <li>Animal detection</li>
-            </ul>
-        </div>
-        
-        <div class="tech-card">
-            <h3>Safety Logic Engine</h3>
-            <p>Combines inputs to assess danger levels</p>
-            <ul class="unordered-list">
-                <li>Pose + object proximity analysis</li>
-                <li>Environmental risk scoring</li>
-                <li>Real-time alert prioritization</li>
-            </ul>
-        </div>
-        
-        <div class="architecture">
-            <h3>System Architecture</h3>
-            <pre>
-Camera → Pose/Object Detection → Risk Analysis → Alert System
-            </pre>
+    <main class="page-wrapper">
+        <h1 class="page-title">Technology Overview</h1>
+        <p class="page-subtitle">How we detect safety risks in real-time</p>
+    
+        <div class="card-grid-container">
+            <div class="info-card">
+                <h3>YOLOv8 Pose Estimation</h3>
+                <p>Detects 17 body keypoints for pose estimation.</p>
+                <ul>
+                    <li>Identifies falls by checking shoulder/hip alignment</li>
+                    <li>Monitors for unusual poses or lack of movement</li>
+                    <li>Provides real-time person tracking</li>
+                </ul>
+            </div>
+            
+            <div class="info-card">
+                <h3>YOLOv8 Object Detection</h3>
+                <p>Identifies dangerous objects and hazards from 80 categories.</p>
+                <ul>
+                    <li>Dangerous object detection (knives, etc.)</li>
+                    <li>Monitors for specific items in restricted areas</li>
+                    <li>Provides location data for all detected items</li>
+                </ul>
+            </div>
+            
+            <div class="info-card">
+                <h3>Motion & Logic Engine</h3>
+                <p>Combines inputs to assess danger levels in real-time.</p>
+                <ul>
+                    <li>Background Subtraction for motion analysis</li>
+                    <li>Checks for overlap between motion and objects</li>
+                    <li>Real-time alert prioritization and capture</li>
+                </ul>
+            </div>
+            
+            <div class="info-card">
+                <h3>System Architecture</h3>
+                <p>Our processing pipeline is built for speed and accuracy.</p>
+                <pre>
+Video Stream → Backend (Python/Flask)
+    ↓
+1. Frame Pre-processing (Resize)
+2. Parallel Processing:
+    - YOLOv8 Pose (Fall Detection)
+    - YOLOv8 Object (Item Detection)
+    - Background Subtractor (Motion)
+3. Risk Analysis Engine
+    (Is a (person) falling?)
+    (Is a (danger object) moving?)
+    ↓
+4. Generate State (Threat/Notice/Clear)
+    ↓
+Frontend → (Stream, Logs, Captures)
+                </pre>
+            </div>
         </div>
     </main>
  
