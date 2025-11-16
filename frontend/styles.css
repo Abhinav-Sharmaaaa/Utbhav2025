@@ -1,177 +1,322 @@
-/* Updated TOURISTA Frontpage CSS with Icons + Modern UI */
+/* TOURISTA RECREATED EXACTLY LIKE THE IMAGE */
 
+/* COLORS */
 :root {
     --primary-color: #0047ab;
-    --secondary-color: #5a67d8;
-    --accent-color: #ffd700;
-    --text-dark: #222;
-    --text-light: #fff;
-    --bg-light: #f5f7fa;
-    --card-bg: #ffffff;
-    --shadow: 0 10px 25px rgba(0,0,0,0.1);
+    --accent: #ffd700;
+    --dark-box: #2a2f36;
+    --light-bg: #f3f4f6;
+    --white: #ffffff;
+    --shadow: 0 10px 25px rgba(0,0,0,0.12);
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Inter', sans-serif;
 }
 
-body {
-    background: var(--bg-light);
-    color: var(--text-dark);
+body{
+    background: var(--light-bg);
 }
 
 /* NAVBAR */
-header {
+header{
+    width:100%;
+    padding:20px 60px;
+    background:#fff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:fixed;
+    top:0;
+    box-shadow:0 3px 12px rgba(0,0,0,0.1);
+    z-index:10;
+}
+
+.nav-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.shield{
+    font-size:26px;
+    color:var(--primary-color);
+}
+
+.logo{
+    font-size:24px;
+    font-weight:800;
+    color:var(--primary-color);
+}
+
+nav a{
+    margin-left:25px;
+    text-decoration:none;
+    color:#333;
+    font-weight:500;
+}
+
+.btn-nav{
+    background:var(--primary-color);
+    padding:10px 20px;
+    border-radius:6px;
+    color:white !important;
+}
+
+/* HERO */
+.hero{
+    height:80vh;
+    background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+    position:relative;
+    display:flex;
+    align-items:center;
+    padding-left:80px;
+}
+
+.hero-overlay{
+    position:absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background:rgba(0,0,0,0.45);
+}
+
+.hero-content{
+    position:relative;
+    color:white;
+    max-width:550px;
+}
+
+.hero h1{
+    font-size:44px;
+    line-height:1.3;
+    margin-bottom:15px;
+}
+
+.hero p{
+    margin-bottom:25px;
+    font-size:18px;
+}
+
+.btn-primary{
+    background:var(--accent);
+    padding:14px 26px;
+    border-radius:8px;
+    font-weight:600;
+    color:black;
+    text-decoration:none;
+}
+
+/* DARK FEATURE BOX */
+.dark-card{
+    background:var(--dark-box);
+    padding:50px 70px;
+    margin:40px auto;
+    width:80%;
+    border-radius:12px;
+    box-shadow:var(--shadow);
+    color:white;
+}
+
+.dark-card h2{
+    margin-bottom:25px;
+    font-size:22px;
+}
+
+.col-box{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.col{
+    flex:1;
+    text-align:center;
+}
+
+.col i{
+    margin-bottom:12px;
+}
+
+.col p{
+    opacity:0.9;
+    line-height:1.5;
+}
+
+/* WHITE CARD LIKE IMAGE */
+.white-card{
+    background:white;
+    width:80%;
+    padding:50px 70px;
+    margin:30px auto;
+    border-radius:12px;
+    box-shadow:var(--shadow);
+}
+
+.white-card h2{
+    margin-bottom:25px;
+    font-size:22px;
+}
+
+/* CTA FINAL CARD */
+.cta-card{
+    background:white;
+    width:80%;
+    padding:40px 70px;
+    margin:30px auto;
+    border-radius:12px;
+    box-shadow:var(--shadow);
+    display:flex;
+    justify-content:space-between;
+}
+
+.cta-col-left{
+    max-width:50%;
+}
+
+.cta-col-left h3{
+    font-size:22px;
+    margin-bottom:12px;
+}
+
+.demo-btn{
+    display:inline-block;
+    margin:15px 0;
+    padding:12px 24px;
+    background:var(--primary-color);
+    border-radius:6px;
+    color:white;
+    text-decoration:0.25s ease;
+}
+.demo-btn:hover {
+    background: #003b8e;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0, 71, 171, 0.35);
+}
+.cta-col-right{
+    display:flex;
+    gap:30px;
+}
+
+.mini-col{
+    text-align:center;
+}
+
+.mini-col i{
+    margin-bottom:8px;
+    font-size:22px;
+}
+
+.small-link{
+    opacity:0.6;
+    margin-top:10px;
+}
+
+/* ============================================
+   SCAN PAGE UI (EXACT LIKE IMAGE)
+   ============================================ */
+
+.top-bar {
     width: 100%;
-    padding: 18px 50px;
+    background: #0d47a1;
+    padding: 18px 30px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background: #ffffff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    position: fixed;
-    top: 0;
-    z-index: 1000;
-}
-
-.logo {
-    font-size: 26px;
-    font-weight: bold;
-    color: var(--primary-color);
-    letter-spacing: 1px;
-}
-
-nav a {
-    margin-left: 25px;
-    text-decoration: none;
-    color: var(--text-dark);
-    font-weight: 500;
-    transition: 0.3s ease;
-}
-
-nav a:hover {
-    color: var(--primary-color);
-}
-
-nav a.btn-nav {
-    padding: 10px 20px;
-    background: var(--primary-color);
+    gap: 12px;
+    font-size: 20px;
     color: white;
-    border-radius: 6px;
+    font-weight: 600;
+    margin-top: 90px; 
 }
 
-/* HERO SECTION */
-.hero {
-    height: 87vh;
-    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-    position: relative;
-    padding-top: 120px;
+.top-bar i {
+    font-size: 22px;
+}
+
+.scan-wrapper {
     display: flex;
-    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 40px;
 }
 
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
+.scan-box {
+    width: 75%;
+    padding: 30px 40px;
+    border-radius: 18px;
+    box-shadow: 0px 15px 40px rgba(0,0,0,0.25);
+    color: white;
+}
+
+.scan-box h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+/* CAMERA WINDOW */
+.camera-frame {
+    width: 100%;
+    height: 500px;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    background:black;
+}
+
+video, canvas {
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.45);
+    position: absolute;
+    object-fit: cover;
 }
 
-.hero-content {
-    position: relative;
-    max-width: 600px;
-    margin-left: 60px;
-    color: white;
-    animation: fadeIn 1s ease;
-}
-
-.hero-content h1 {
-    font-size: 48px;
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 20px;
-}
-
-.hero-content p {
-    font-size: 20px;
-    margin-bottom: 25px;
-    opacity: 0.9;
-}
-
-.btn-primary {
-    background: var(--accent-color);
-    padding: 14px 26px;
-    border-radius: 8px;
-    color: #000;
-    font-size: 18px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.btn-primary:hover {
-    background: #ffeb66;
-}
-
-/* FEATURES SECTION */
-.features {
-    padding: 80px;
-    background: white;
+/* BUTTONS */
+.button-row {
     display: flex;
     justify-content: space-between;
-    gap: 40px;
+    margin-top: 25px;
 }
 
-.feature-box {
-    flex: 1;
-    background: var(--bg-light);
-    padding: 30px;
-    border-radius: 14px;
-    text-align: center;
-    box-shadow: var(--shadow);
-    transition: 0.3s;
-}
-
-.feature-box:hover {
-    transform: translateY(-5px);
-}
-
-.feature-box i {
-    margin-bottom: 15px;
-}
-
-.feature-box h3 {
-    margin-bottom: 12px;
-    font-size: 22px;
-    color: var(--primary-color);
-}
-
-.feature-box p {
+.btn {
+    padding: 13px 30px;
+    border-radius: 30px;
     font-size: 16px;
-    color: #444;
-    line-height: 1.5;
+    cursor: pointer;
+    font-weight: 600;
+    border: none;
+    transition: 0.2s ease-in-out;
 }
 
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.btn.start {
+    background: #1a73e8;
+    color: white;
 }
 
-/* RESPONSIVE */
-@media (max-width: 900px) {
-    .features { flex-direction: column; padding: 40px; }
-    .hero-content h1 { font-size: 36px; }
-    header { padding: 15px 25px; }
+.btn.stop {
+    background: #3a3f46;
+    color: white;
 }
 
-@media (max-width: 600px) {
-    nav a { margin-left: 12px; }
-    .hero-content { margin-left: 20px; }
-    .hero-content h1 { font-size: 30px; }
+.btn.back {
+    background: #e5e7eb;
+    color: #222;
+    text-decoration: none;
+}
+.btn:hover {
+    background: #003b8e;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0, 71, 171, 0.35);
+}
+/* STATUS */
+.system-status {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #00ff60;
 }
